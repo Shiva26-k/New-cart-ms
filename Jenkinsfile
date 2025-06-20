@@ -1,7 +1,7 @@
 pipeline{
     agent any 
     environment{
-        DEPLOY_TO = 'release'
+        DEPLOY_TO = 'production'
     }
     stages{
         stage('Deplyoing in DEV'){
@@ -12,8 +12,8 @@ pipeline{
         stage('DEploying in Production'){
             when{
                 anyOf{
-                    branch 'release'
-                    environment name :'DEPLOY_TO' , value : 'production'
+                    branch 'production'
+                    environment name :'DEPLOY_TO' , value : 'release'
                 }
             }
             steps{
