@@ -10,8 +10,9 @@ pipeline{
             steps{
                 when{
                expression {BRANCH_NAME ==~ /(production|staging)/}
-                 echo "Deploying in prod environment"
+                 
                 }
+                echo "Deploying in prod environment"
             }
         }
     }
