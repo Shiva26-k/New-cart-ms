@@ -1,23 +1,49 @@
 pipeline{
-    agent any 
-    environment{
-        DEPLOY_TO = 'production'
-    }
+    agent any
     stages{
-        stage('Deplyoing in DEV'){
+        stage('Build-environmet'){
             steps{
-                echo "Successfully deployed in DEV"
+                echo "Building the application"
             }
         }
-        stage('DEploying in Production'){
+        stage('Code_Analysis'){
+            steps{
+                echo "Analysing the Code"
+            }
+        }
+        stage('Building_DockerFile'){
+            steps{
+                echo "Docker Building"
+            }
+        }
+        stage('Deploying_Dev'){
+            steps{
+                echo "Deploying DEV environment"
+            }
+        }
+        stage('Deploying_Test'){
+            steps{
+                echo "Deploying TEST environment"
+            }
+        }
+        stage('Deplyoing_stage'){
             when{
-                anyOf{
-                    branch 'production'
-                    environment name :'DEPLOY_TO' , value : 'release'
-                }
+                branch 'release-*'
             }
             steps{
-                echo "Successfully deployed in PRODUCTION"
+                echo "Deploying STAGE environment"
+            }
+        }
+        stage('Deploying_Prod'){
+            when{
+                //tag pattern
+                //vx.x.x
+                //v1.2.3 is correct
+                //v.1.2.3 is wrong
+                tag pattern : "v\\d{1,2}.\\d{1,2}.\\d{1,2}" , comparator: "REGEXP"
+            }
+            steps{
+                echo "Deploying PRODUCTION environmnt"
             }
         }
     }
