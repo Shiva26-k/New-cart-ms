@@ -1,25 +1,15 @@
 pipeline{
     agent any
     environment{
-        name = "Shiva"
-        courses = "devops and gcp"
+        DEPLOY_TO = 'production'
     }
     stages{
-        stage('Build'){
-             environment{
-            cloud ="gcp"
-        } 
-            steps{
-                echo "Welconme ${name}"
-                echo "you registered for ${courses}"
-                echo "You certificated in ${cloud}"
+        stage('deploying'){
+            when{
+                equals expected:"prod" , actual:"${DEPLOT_TO}"
             }
-        }
-        stage('sonar'){
             steps{
-                echo "Welconme ${name}"
-                echo "you registered for ${courses}"
-                echo "Your Branch name ${env.BRANCH_NAME}"
+                echo "Deploying in production"
             }
         }
     }
