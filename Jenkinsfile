@@ -1,19 +1,25 @@
 pipeline{
-    agent any 
+    agent any
+    environment{
+        name = "Shiva"
+        courses = "devops and gcp"
+    }
     stages{
         stage('Build'){
+             environment{
+            cloud ="gcp"
+        } 
             steps{
-                echo "This is Build stage"
+                echo "Welconme ${name}"
+                echo "you registered for ${courses}"
+                echo "You certificated in ${cloud}"
             }
         }
-        stage('Docker'){
+        stage('sonar'){
             steps{
-                echo "This is docker stage"
-            }
-        }
-        stage('k8sdeploy'){
-            steps{
-                echo "This is k8s file"
+                echo "Welconme ${name}"
+                echo "you registered for ${courses}"
+                echo "Your Branch name ${env.BRANCH_NAME}"
             }
         }
     }
