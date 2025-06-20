@@ -36,11 +36,7 @@ pipeline{
         }
         stage('Deploying_Prod'){
             when{
-                //tag pattern
-                //vx.x.x
-                //v1.2.3 is correct
-                //v.1.2.3 is wrong
-                tag pattern : "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}" , comparator: "REGEXP"
+                tag pattern : "^v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}$" , comparator: "REGEXP"
             }
             steps{
                 echo "Deploying PRODUCTION  ${env.GIT_TAG_NAME} environmnt"
