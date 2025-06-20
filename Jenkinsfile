@@ -43,7 +43,7 @@ pipeline{
                 tag pattern : "v\\d{1,2}.\\d{1,2}.\\d{1,2}" , comparator: "REGEXP"
             }
             steps{
-                echo "Deploying PRODUCTION environmnt"
+                echo "Deploying PRODUCTION  ${env.GIT_TAG_NAME} environmnt"
             }
         }
     }
